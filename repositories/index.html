@@ -1,0 +1,435 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> GitHub | WavesLab </title> <meta name="author" content="WavesLab "> <meta name="description" content="Open-source code, toolboxes, and software packages developed by WAVESLAB."> <meta name="keywords" content="Waveslab, Giulia Cisotto, academic-website, University of Trieste, Shayan Sharifi"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 1180px;
+  }
+</style> <link rel="stylesheet" href="/waveslab/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/waveslab/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="/waveslab/assets/img/waveslab_logo.png?v=f5df269822ea1a14426cbe91d1d4d46b"> <link rel="stylesheet" href="/waveslab/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://shayansharifi.net/waveslab/repositories/"> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/waveslab/"> WavesLab </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/waveslab/">Home </a> </li> <li class="nav-item "> <a class="nav-link" href="/waveslab/News/index.html">News </a> </li> <li class="nav-item "> <a class="nav-link" href="/waveslab/team/">Team </a> </li> <li class="nav-item "> <a class="nav-link" href="/waveslab/publications/">Publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/waveslab/projects/">Projects </a> </li> <li class="nav-item active"> <a class="nav-link" href="/waveslab/repositories/">GitHub <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/waveslab/collaborations/">Collaborations </a> </li> <li class="nav-item "> <a class="nav-link" href="/waveslab/Events/">Events </a> </li> <li class="nav-item "> <a class="nav-link" href="/waveslab/Join%20us/">Join us </a> </li> <li class="nav-item "> <a class="nav-link" href="/waveslab/contact/">Contact </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <style>
+  .repo-card {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0 !important;
+    padding: 1.25rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .repo-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(15, 52, 96, 0.08) !important;
+  }
+
+  .repo-title {
+    color: #0f3460 !important;
+    font-weight: 700;
+    font-size: 1.15rem;
+    text-decoration: none !important;
+  }
+
+  .repo-title:hover {
+    color: #16213e !important;
+    text-decoration: underline !important;
+  }
+
+  /* Primary Button (Solid Dark Blue) */
+  .btn-theme-primary {
+    background-color: #0f3460 !important;
+    color: #ffffff !important;
+    border: 1px solid #0f3460 !important;
+    font-weight: 600;
+    border-radius: 6px;
+    padding: 0.3rem 0.75rem;
+    font-size: 0.85rem;
+    text-decoration: none !important;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .btn-theme-primary:hover {
+    background-color: #16213e !important;
+    color: #ffffff !important;
+  }
+
+  /* Outline Toggle Button */
+  .btn-theme-outline {
+    background-color: transparent !important;
+    color: #0f3460 !important;
+    border: 1px solid #0f3460 !important;
+    font-weight: 600;
+    border-radius: 6px;
+    padding: 0.3rem 0.75rem;
+    font-size: 0.85rem;
+    text-decoration: none !important;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .btn-theme-outline:hover,
+  .btn-theme-outline.active {
+    background-color: #0f3460 !important;
+    color: #ffffff !important;
+  }
+
+  .user-badge {
+    background-color: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 20px;
+    padding: 0.4rem 1rem;
+    font-weight: 600;
+    color: #0f172a;
+    text-decoration: none !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .user-badge:hover {
+    background-color: #e2e8f0;
+    color: #0f3460;
+  }
+
+  /* Expandable Publication Drawer Inside Card */
+  .repo-pub-box {
+    display: none;
+    background-color: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-left: 4px solid #0f3460;
+    border-radius: 8px;
+    padding: 0.85rem 1rem;
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    color: #1e293b;
+  }
+
+  .repo-pub-box.open {
+    display: block;
+  }
+
+  /* Bullet markers inside the expandable publication drawer */
+  .repo-pub-list {
+    list-style: none !important;
+    padding-left: 0 !important;
+    margin: 0 !important;
+  }
+
+  .repo-pub-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .repo-pub-bullet {
+    font-weight: 700;
+    color: #0f3460;
+    min-width: 0.85rem;
+    flex-shrink: 0;
+    line-height: 1.4;
+  }
+
+  /* Force al-folio's bib.liquid layout to stay compact inside the drawer */
+  .repo-pub-box .row {
+    display: block !important;
+    margin: 0 !important;
+  }
+
+  .repo-pub-box .abbr,
+  .repo-pub-box .preview,
+  .repo-pub-box .badges {
+    display: none !important;
+  }
+
+  .repo-pub-box .col-sm-8,
+  .repo-pub-box .col-sm-10 {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  .repo-pub-box .title {
+    font-weight: 700 !important;
+    color: #0f3460 !important;
+    margin-bottom: 0.2rem !important;
+  }
+
+  .repo-pub-box .links a.btn {
+    padding: 0.15rem 0.5rem !important;
+    font-size: 0.75rem !important;
+    margin-top: 0.35rem !important;
+    border: 1px solid #0f3460 !important;
+    color: #0f3460 !important;
+    border-radius: 4px !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+  }
+</style> <div class="header-bar mb-4"> <h1 class="header-title">Repositories</h1> <p class="header-subtitle">Open-source code, toolboxes, and software packages developed at WAVESLAB.</p> </div> <h2 class="mb-3" style="color: #0f172a; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;"> GitHub Profiles </h2> <div class="d-flex flex-wrap gap-2 mb-5"> <a href="https://github.com/CisottoGiulia" target="_blank" rel="noopener noreferrer" class="user-badge"> <i class="fa-brands fa-github"></i> @CisottoGiulia </a> <a href="https://github.com/shayanever" target="_blank" rel="noopener noreferrer" class="user-badge"> <i class="fa-brands fa-github"></i> @shayanever </a> <a href="https://github.com/jesus-333" target="_blank" rel="noopener noreferrer" class="user-badge"> <i class="fa-brands fa-github"></i> @jesus-333 </a> </div> <h2 class="mt-4 mb-3" style="color: #0f172a; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;"> Featured Repositories </h2> <div class="row row-cols-1 row-cols-md-2 g-4 mb-5"> <div class="col d-flex align-items-stretch"> <div class="repo-card w-100 d-flex flex-column justify-content-between"> <div> <div class="d-flex align-items-center justify-content-between mb-2"> <a href="https://github.com/CisottoGiulia/EEG-EMG-analytics" target="_blank" rel="noopener noreferrer" class="repo-title"> <i class="fa-solid fa-book-bookmark me-1"></i> CisottoGiulia/EEG-EMG-analytics </a> <a href="https://github.com/CisottoGiulia/EEG-EMG-analytics" target="_blank" rel="noopener noreferrer" class="text-secondary small"> <i class="fa-brands fa-github fa-lg"></i> </a> </div> <p class="text-secondary small mb-3">Analytics pipeline and toolsets for synchronized EEG and EMG signal processing.</p> </div> <div class="pt-2 mt-2 border-top"> <div class="d-flex flex-wrap gap-2"> <a href="https://github.com/CisottoGiulia/EEG-EMG-analytics" target="_blank" rel="noopener noreferrer" class="btn-theme-primary"> View Repository <i class="fa-brands fa-github fa-xs ms-1"></i> </a> <button type="button" class="btn-theme-outline" onclick="toggleRepoPub('pub-box-1', this)"> Related Publication <i class="fa-solid fa-chevron-down fa-xs ms-1"></i> </button> </div> <div id="pub-box-1" class="repo-pub-box"> <ul class="repo-pub-list"> <li class="repo-pub-item "> <span class="repo-pub-bullet">•</span> <div class="flex-grow-1"> <span id="cisottoHEALTHCOM2018">Cisotto, G., Guglielmi, A. V., Badia, L., &amp; Zanella, A. (2018). Classification of grasping tasks based on EEG-EMG coherence. <i>20th IEEE International Conference on e-Health Networking, Applications and Services, Healthcom 2018, Ostrava, Czech Republic, September 17-20, 2018</i>, 1–6. https://doi.org/10.1109/HEALTHCOM.2018.8531140</span> </div> </li> </ul> </div> </div> </div> </div> <div class="col d-flex align-items-stretch"> <div class="repo-card w-100 d-flex flex-column justify-content-between"> <div> <div class="d-flex align-items-center justify-content-between mb-2"> <a href="https://github.com/jesus-333/Variational-Autoencoder-for-EEG-analysis" target="_blank" rel="noopener noreferrer" class="repo-title"> <i class="fa-solid fa-book-bookmark me-1"></i> jesus-333/Variational-Autoencoder-for-EEG-analysis </a> <a href="https://github.com/jesus-333/Variational-Autoencoder-for-EEG-analysis" target="_blank" rel="noopener noreferrer" class="text-secondary small"> <i class="fa-brands fa-github fa-lg"></i> </a> </div> <p class="text-secondary small mb-3">Deep learning architecture based on VAEs for feature extraction from EEG data.</p> </div> <div class="pt-2 mt-2 border-top"> <div class="d-flex flex-wrap gap-2"> <a href="https://github.com/jesus-333/Variational-Autoencoder-for-EEG-analysis" target="_blank" rel="noopener noreferrer" class="btn-theme-primary"> View Repository <i class="fa-brands fa-github fa-xs ms-1"></i> </a> <button type="button" class="btn-theme-outline" onclick="toggleRepoPub('pub-box-2', this)"> Related Publications (2) <i class="fa-solid fa-chevron-down fa-xs ms-1"></i> </button> </div> <div id="pub-box-2" class="repo-pub-box"> <ul class="repo-pub-list"> <li class="repo-pub-item mb-2 pb-2 border-bottom"> <span class="repo-pub-bullet">•</span> <div class="flex-grow-1"> <span id="hveegnet2024">Cisotto, G., Zancanaro, A., Zoppis, I. F., &amp; Manzoni, S. L. (2024). hvEEGNet: a novel deep learning model for high-fidelity EEG reconstruction. <i>Frontiers Neuroinformatics</i>, <i>18</i>. https://doi.org/10.3389/FNINF.2024.1459970</span> </div> </li> <li class="repo-pub-item "> <span class="repo-pub-bullet">•</span> <div class="flex-grow-1"> <span id="zancanaroCIBB2024">Zancanaro, A., &amp; Cisotto, G. (2024). The Impact of Mis-Labeled Artefacts on Deep Learning Models for EEG Analysis: a Case Study. In L. Cerulo, F. Napolitano, F. Bardozzo, L. Cheng, A. Occhipinti, &amp; S. M. Pagnotta (Eds.), <i>Computational Intelligence Methods for Bioinformatics and Biostatistics - 19th International Meeting, CIBB 2024, Benevento, Italy, September 4-6, 2024, Revised Selected Papers</i> (Vol. 15276, pp. 248–255). Springer. https://doi.org/10.1007/978-3-031-89704-7_19</span> </div> </li> </ul> </div> </div> </div> </div> <div class="col d-flex align-items-stretch"> <div class="repo-card w-100 d-flex flex-column justify-content-between"> <div> <div class="d-flex align-items-center justify-content-between mb-2"> <a href="https://github.com/shayanever/ecg-Rpeak-validation-neurokit" target="_blank" rel="noopener noreferrer" class="repo-title"> <i class="fa-solid fa-book-bookmark me-1"></i> shayanever/ecg-Rpeak-validation-neurokit </a> <a href="https://github.com/shayanever/ecg-Rpeak-validation-neurokit" target="_blank" rel="noopener noreferrer" class="text-secondary small"> <i class="fa-brands fa-github fa-lg"></i> </a> </div> <p class="text-secondary small mb-3">Validation tools for ECG R-peak detection benchmarking against NeuroKit2.</p> </div> <div class="pt-2 mt-2 border-top"> <div class="d-flex flex-wrap gap-2"> <a href="https://github.com/shayanever/ecg-Rpeak-validation-neurokit" target="_blank" rel="noopener noreferrer" class="btn-theme-primary"> View Repository <i class="fa-brands fa-github fa-xs ms-1"></i> </a> <button type="button" class="btn-theme-outline" onclick="toggleRepoPub('pub-box-3', this)"> Related Publication <i class="fa-solid fa-chevron-down fa-xs ms-1"></i> </button> </div> <div id="pub-box-3" class="repo-pub-box"> <ul class="repo-pub-list"> <li class="repo-pub-item "> <span class="repo-pub-bullet">•</span> <div class="flex-grow-1"> <span id="sharifi2026learning">Sharifi, S., Treu, R., Gandin, I., Garoia, F., Merlo, M., &amp; Cisotto, G. (to appear, to appear). Learning from VAE Errors to support ECG-based Differential Diagnosis of Myocardial Scar. <i>Proceedings of the Fifth PharML Workshop, Held in Conjunction with ECML PKDD 2026, Naples, Italy, September 6–9, 2026 *(to Appear)*.</i> https://arxiv.org/abs/2609.05294</span> </div> </li> </ul> </div> </div> </div> </div> <div class="col d-flex align-items-stretch"> <div class="repo-card w-100 d-flex flex-column justify-content-between"> <div> <div class="d-flex align-items-center justify-content-between mb-2"> <a href="https://github.com/shayanever/Sleep-Apnea-and-Hypopnea-Detection" target="_blank" rel="noopener noreferrer" class="repo-title"> <i class="fa-solid fa-book-bookmark me-1"></i> shayanever/Sleep-Apnea-and-Hypopnea-Detection </a> <a href="https://github.com/shayanever/Sleep-Apnea-and-Hypopnea-Detection" target="_blank" rel="noopener noreferrer" class="text-secondary small"> <i class="fa-brands fa-github fa-lg"></i> </a> </div> <p class="text-secondary small mb-3">Machine learning framework for automated sleep apnea and hypopnea detection.</p> </div> <div class="pt-2 mt-2 border-top"> <div class="d-flex flex-wrap gap-2"> <a href="https://github.com/shayanever/Sleep-Apnea-and-Hypopnea-Detection" target="_blank" rel="noopener noreferrer" class="btn-theme-primary"> View Repository <i class="fa-brands fa-github fa-xs ms-1"></i> </a> <button type="button" class="btn-theme-outline" onclick="toggleRepoPub('pub-box-4', this)"> Related Publication <i class="fa-solid fa-chevron-down fa-xs ms-1"></i> </button> </div> <div id="pub-box-4" class="repo-pub-box"> <ul class="repo-pub-list"> <li class="repo-pub-item "> <span class="repo-pub-bullet">•</span> <div class="flex-grow-1"> <span id="cisottoItalIA2025">Cisotto, G., Sharifi, S., Sadeghzadehdarandash, S., &amp; Badia, L. (2025). Feature importance via Shapley values in random forests for sleep apnea and hypopnea detection. In L. Manzoni, L. Bortolussi, G. Cisotto, &amp; F. Anselmi (Eds.), <i>Joint Proceedings of the Thematic Workshops at Ital-IA 2025 colocated with the 5th National Conference on Artificial Intelligence, organized by CINI (Ital-IA 2025), Trieste, Italy, June 23-24, 2025</i> (Vol. 4121). CEUR-WS.org. https://ceur-ws.org/Vol-4121/Ital-IA_2025_paper_121.pdf</span> </div> </li> </ul> </div> </div> </div> </div> </div> <script>
+  function toggleRepoPub(boxId, btn) {
+    const box = document.getElementById(boxId);
+    if (!box) return;
+    box.classList.toggle('open');
+    btn.classList.toggle('active');
+    const icon = btn.querySelector('i');
+    if (icon) {
+      icon.classList.toggle('fa-chevron-down');
+      icon.classList.toggle('fa-chevron-up');
+    }
+  }
+</script> <link rel="stylesheet" href="/waveslab/assets/css/theme-override.css"> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 WavesLab . Designed by <a href="https://shayansharifi.net/" target="_blank">Shayan Sharifi</a>. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/waveslab/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/waveslab/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/waveslab/assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/waveslab/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/waveslab/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/waveslab/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/waveslab/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/waveslab/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/waveslab/assets/al_img_tools/js/zoom.js"></script> <script defer src="/waveslab/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/waveslab/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/waveslab/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-home",
+    title: "Home",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/waveslab/";
+    },
+  },{id: "nav-news",
+          title: "News",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/waveslab/News/index.html";
+          },
+        },{id: "nav-team",
+          title: "Team",
+          description: "Meet the researchers, students, and collaborators at WAVESLAB.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/waveslab/team/";
+          },
+        },{id: "nav-publications",
+          title: "Publications",
+          description: "Publications by categories in reverse chronological order.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/waveslab/publications/";
+          },
+        },{id: "nav-projects",
+          title: "Projects",
+          description: "A growing collection of research initiatives and active projects.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/waveslab/projects/";
+          },
+        },{id: "nav-github",
+          title: "GitHub",
+          description: "Open-source code, toolboxes, and software packages developed by WAVESLAB.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/waveslab/repositories/";
+          },
+        },{id: "nav-collaborations",
+          title: "Collaborations",
+          description: "Building interdisciplinary bridges across academic institutions, research hospitals, and industry leaders.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/waveslab/collaborations/";
+          },
+        },{id: "nav-events",
+          title: "Events",
+          description: "Course materials, schedules, and resources for classes taught.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/waveslab/Events/";
+          },
+        },{id: "nav-join-us",
+          title: "Join us",
+          description: "Join the WavesLab as a Ph.D. researcher, Postdoc, or Master/Bachelor thesis student.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/waveslab/Join%20us/";
+          },
+        },{id: "nav-contact",
+          title: "Contact",
+          description: "Get in touch with the WavesLab or visit our facilities at the University of Trieste.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/waveslab/contact/";
+          },
+        },{id: "post-prof-selina-wriessnegger-visiting-professor-at-the-waveslab",
+        
+          title: "Prof. Selina Wriessnegger Visiting Professor at the WavesLab",
+        
+        description: "Prof. Selina Wriessnegger (TU Graz) will visit Units from Nov.23rd to Dec.4th",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/waveslab/news/2026/Prof-Wriessnegger-VP/";
+          
+        },
+      },{id: "post-keynote-speech-at-the-ieee-comsoc-phd-school-on-e-health",
+        
+          title: "Keynote Speech at the IEEE ComSoc PhD School on E-Health",
+        
+        description: "Giulia Cisotto gave an invited keynote speech at the University of Genova",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/waveslab/news/2026/Keynote-IEEE-PhD-School-Genova/";
+          
+        },
+      },{id: "post-conclusion-of-yusuf-üveyik-39-s-visiting-internship-at-the-waveslab",
+        
+          title: "Conclusion of Yusuf Üveyik&#39;s Visiting Internship at the WavesLab",
+        
+        description: "Yusuf Üveyik concludes his internship period at the WavesLab",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/waveslab/news/2026/Yusuf-Uveyik-Internship-Conclusion/";
+          
+        },
+      },{id: "post-the-waveslab-at-trieste-next-2026",
+        
+          title: "The WavesLab at Trieste Next 2026",
+        
+        description: "The WavesLab participated in Trieste Next 2026 from September 25th to 27th",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/waveslab/news/2026/trieste-next/";
+          
+        },
+      },{id: "post-invited-talk-at-the-italian-network-for-computational-and-theoretical-neuroscience-inctn",
+        
+          title: "Invited Talk at the Italian Network for Computational and Theoretical Neuroscience (INCTN)",
+        
+        description: "Giulia Cisotto gave an invited talk at INCTN 2026 hosted by SISSA in Trieste",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/waveslab/news/2026/Talk-INCTN-SISSA/";
+          
+        },
+      },{id: "post-shayan-sharifi-presents-first-year-phd-activity-at-adsai-poster-session",
+        
+          title: "Shayan Sharifi Presents First-Year PhD Activity at ADSAI Poster Session",
+        
+        description: "Shayan Sharifi presented his first-year PhD research at the ADSAI poster session",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/waveslab/news/2026/Shayan-Sharifi-PhD-Poster/";
+          
+        },
+      },{id: "post-official-announcement-of-the-waveslab-launch-at-agorai-sandpit-event",
+        
+          title: "Official Announcement of the WavesLab Launch at AgorAI Sandpit Event",
+        
+        description: "Giulia Cisotto announced the launch of the WavesLab at Palazzo Berlam in Trieste",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/waveslab/news/2026/AgorAI-Sandpit-WavesLab-Launch/";
+          
+        },
+      },{id: "post-paper-accepted-at-ecml-pkdd-workshop-pharml",
+        
+          title: "Paper Accepted at ECML PKDD Workshop PharML",
+        
+        description: "Paper on ECG-based differential diagnosis of myocardial scar accepted at PharML",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/waveslab/news/2026/Paper-Accepted-ECML-PKDD-PharML/";
+          
+        },
+      },{id: "post-brief-talk-on-autoresearch-by-dr-alberto-zancanaro",
+        
+          title: "Brief Talk on AutoResearch by Dr. Alberto Zancanaro",
+        
+        description: "Former lab member Dr. Alberto Zancanaro will give a brief talk on AutoResearch on July 16th at 10 am.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/waveslab/news/2026/alberto-zancanaro-talk/";
+          
+        },
+      },{id: "post-welcoming-visiting-student-yusuf-üveyik",
+        
+          title: "Welcoming Visiting Student Yusuf Üveyik!",
+        
+        description: "The WavesLab welcomes Yusuf Üveyik, BSc student from Marmara University, as a visiting student.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/waveslab/news/2026/welcome-yusuf/";
+          
+        },
+      },{id: "books-the-godfather",
+          title: 'The_godfather',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/waveslab/books/the_godfather/";
+            },},{id: "projects-edge-ai-enabled-bci-for-speech-rehabilitation",
+          title: 'Edge AI-enabled BCI for Speech Rehabilitation',
+          description: "Developing an affordable, privacy-preserving, real-time home rehabilitation system enhanced by a local LLM.",
+          section: "Projects",handler: () => {
+              window.location.href = "/waveslab/projects/AgorAI_BCI_project/";
+            },},{id: "projects-explainable-ai-for-ecg-based-screening-of-cardiomyopathies",
+          title: 'Explainable AI for ECG-based Screening of Cardiomyopathies',
+          description: "This study aims to develop explainable machine-learning and deep-learning models to identify ECG-derived signatures associated with contrast-enhanced cardiac magnetic resonance imaging features.",
+          section: "Projects",handler: () => {
+              window.location.href = "/waveslab/projects/ECG_ASUGI_project/";
+            },},{id: "teachings-computational-neuroscience",
+          title: 'Computational Neuroscience',
+          description: "This course covers the foundational aspects of data science, including data collection, cleaning, analysis, and visualization. Students will learn practical skills for working with real-world datasets.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/waveslab/teachings/data-science-fundamentals/";
+            },},{id: "teachings-introduction-to-machine-learning",
+          title: 'Introduction to Machine Learning',
+          description: "This course provides an introduction to machine learning concepts, algorithms, and applications. Students will learn about supervised and unsupervised learning, model evaluation, and practical implementations.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/waveslab/teachings/introduction-to-machine-learning/";
+            },},{
+        id: 'social-cv',
+        title: 'CV',
+        section: 'Socials',
+        handler: () => {
+          window.open("/waveslab/assets/pdf/example_pdf.pdf", "_blank");
+        },
+      },{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:", "_blank");
+        },
+      },{
+        id: 'social-inspire',
+        title: 'Inspire HEP',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://inspirehep.net/authors/1010907", "_blank");
+        },
+      },{
+        id: 'social-rss',
+        title: 'RSS Feed',
+        section: 'Socials',
+        handler: () => {
+          window.open("/waveslab/feed.xml", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=", "_blank");
+        },
+      },{
+        id: 'social-custom_social',
+        title: 'Custom_social',
+        section: 'Socials',
+        handler: () => {
+          window.open("", "_blank");
+        },
+      },];
+
+</script> <script src="/waveslab/assets/al_search/js/shortcut-key.js"></script> </body> </html>

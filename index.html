@@ -1,0 +1,648 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> WavesLab </title> <meta name="author" content="WavesLab "> <meta name="description" content="Waveslab | AI biosignal preprocessing, analysis, and modeling. "> <meta name="keywords" content="Waveslab, Giulia Cisotto, academic-website, University of Trieste, Shayan Sharifi"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 1180px;
+  }
+</style> <link rel="stylesheet" href="/waveslab/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/waveslab/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="/waveslab/assets/img/waveslab_logo.png?v=f5df269822ea1a14426cbe91d1d4d46b"> <link rel="stylesheet" href="/waveslab/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://shayansharifi.net/waveslab/"> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item active"> <a class="nav-link" href="/waveslab/">Home <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/waveslab/News/index.html">News </a> </li> <li class="nav-item "> <a class="nav-link" href="/waveslab/team/">Team </a> </li> <li class="nav-item "> <a class="nav-link" href="/waveslab/publications/">Publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/waveslab/projects/">Projects </a> </li> <li class="nav-item "> <a class="nav-link" href="/waveslab/repositories/">GitHub </a> </li> <li class="nav-item "> <a class="nav-link" href="/waveslab/collaborations/">Collaborations </a> </li> <li class="nav-item "> <a class="nav-link" href="/waveslab/Events/">Events </a> </li> <li class="nav-item "> <a class="nav-link" href="/waveslab/Join%20us/">Join us </a> </li> <li class="nav-item "> <a class="nav-link" href="/waveslab/contact/">Contact </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <style>
+  /* --- Global Reset & Page Scroll Setup --- */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden !important; /* Prevents horizontal scroll entirely */
+    background-color: #f8fafc !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .content-section {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem;
+  }
+
+  /* --- Fullscreen Interactive Waves Banner --- */
+  .banner-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    margin-left: calc(-50vw + 50%);
+    margin-top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa !important;
+    overflow: hidden;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  canvas#waveCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  /* --- Central Content Wrapper --- */
+  .logo-wrapper {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 60px 60px 60px;
+    
+    /* Shift logo upward visually */
+    margin-top: -110px; 
+    
+    /* Radial soft fade effect so the wave behind the logo diminishes cleanly */
+    background: radial-gradient(circle, rgba(248, 249, 250, 0.95) 62%, rgba(248, 249, 250, 0) 75%);
+    border-radius: 50%;
+    pointer-events: auto;
+  }
+
+  /* Entrance Animation Container */
+  .logo-overlay {
+    max-width: 620px; /* Enlarged logo size */
+    width: 85vw;
+    opacity: 0;
+    cursor: pointer;
+    animation: fadeInLogo 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    animation-delay: 0.2s;
+  }
+
+  /* Hover effect separated on <img> to prevent CSS keyframe conflicts */
+  .logo-overlay img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    will-change: transform;
+  }
+
+  .logo-overlay:hover img {
+    transform: scale(1.08); /* Scales up logo smoothly on mouse hover */
+  }
+
+  @keyframes fadeInLogo {
+    from {
+      opacity: 0;
+      transform: translateY(12px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  /* Subtitle Typewriter Styling */
+  .subtitle {
+    margin-top: 18px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #0f3460;
+    min-height: 1.4em;
+    text-align: center;
+  }
+
+  /* Blinking cursor for the typewriter effect */
+  .typewriter-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background-color: #0f3460;
+    margin-left: 2px;
+    vertical-align: middle;
+    animation: blink 0.8s infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* --- Scroll-Driven Fade In for Page Elements --- */
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    will-change: opacity, transform;
+  }
+
+  .reveal-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* --- Premium Section Styling --- */
+  .section-block {
+    margin-bottom: 5rem;
+  }
+  .section-title {
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding-bottom: 0.75rem;
+  }
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #00779b, #6a1b9a);
+    border-radius: 2px;
+  }
+  .btn-more {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #00779b;
+    text-decoration: none;
+    border: 2px solid #e2e8f0;
+    padding: 0.4rem 1.1rem;
+    border-radius: 9999px;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+  }
+  .btn-more:hover {
+    background-color: #00779b;
+    border-color: #00779b;
+    color: #ffffff !important;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 119, 155, 0.15);
+    transform: translateY(-1px);
+  }
+
+  /* Intro Section Card */
+  .intro-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 3rem 2.5rem;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Card-Based News Styling */
+  .news-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.01), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
+  }
+  .news-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 20px -3px rgba(15, 23, 42, 0.08);
+    border-color: #cbd5e1;
+  }
+  .news-date-badge {
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    color: #475569;
+    padding: 1rem;
+    border-radius: 10px;
+    min-width: 90px;
+    text-align: center;
+    font-weight: 700;
+    line-height: 1.2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .news-date-badge .day {
+    font-size: 1.5rem;
+    color: #0f172a;
+  }
+  .news-date-badge .month {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .news-thumbnail {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+  }
+  .news-content {
+    flex-grow: 1;
+  }
+
+  /* Projects Grid */
+  .research-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.75rem;
+  }
+  .research-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.01);
+  }
+  .research-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 24px -4px rgba(15, 23, 42, 0.08);
+    border-color: #cbd5e1;
+  }
+
+  /* Publication Wrapper */
+  .publication-wrapper {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.01);
+  }
+</style> <div class="banner-container" id="banner"> <canvas id="waveCanvas"></canvas> <div class="logo-wrapper"> <div class="logo-overlay"> <img src="/waveslab/assets/img/waveslab_logo.png" alt="WAVESLAB Logo"> </div> <div class="subtitle" id="typewriterSubtitle"></div> </div> </div> <div class="content-section"> <div class="section-block reveal-on-scroll"> <div class="intro-card text-center"> <h2 class="text-3xl font-extrabold mb-4" style="color: #0f172a; letter-spacing: -0.02em;">Welcome to WAVESLAB</h2> <p class="text-lg text-slate-600 leading-relaxed mb-4 max-w-2xl mx-auto"> We develop advanced methods for biosignal preprocessing, analysis, and modeling, with a focus on electroencephalography (EEG) and electrocardiography (ECG). </p> <p class="text-base text-slate-500 leading-relaxed max-w-2xl mx-auto font-medium"> A central goal of our lab is to address critical data-quality issues and build machine learning models that are robust to the intrinsic variability of biological signals. </p> </div> </div> <div class="section-block reveal-on-scroll"> <div class="section-title"> <span>Incoming Events</span> <a href="/waveslab/Events/" class="btn-more">View All Events →</a> </div> <div class="news-container"> <div class="news-card" style="justify-content: space-between; align-items: flex-start; flex-wrap: wrap; border-left: 5px solid #0f3460;"> <div style="display: flex; gap: 1.5rem; align-items: flex-start; flex: 1 1 420px;"> <img src="/waveslab/assets/img/selina_in_her_lab.jpg" class="news-thumbnail" style="width: 110px; height: 130px; object-position: center 15%; flex-shrink: 0;" alt="Seminar &amp; Round Table: Passive Brain-Computer Interfaces in EEG-based Neuroadaptive Systems"> <div class="news-content"> <span class="text-xs font-bold uppercase tracking-wider inline-block px-2 py-0.5 rounded-full mb-1" style="background-color: #e0f2fe; color: #00779b;"> Incoming Event </span> <h4 class="text-lg font-bold text-slate-800 mb-2"> Seminar &amp; Round Table: Passive Brain-Computer Interfaces in EEG-based Neuroadaptive Systems </h4> <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 0.55rem 0.8rem; margin-bottom: 0.65rem; display: flex; flex-direction: column; gap: 0.3rem;"> <div class="text-xs text-slate-700" style="display: flex; align-items: center; gap: 0.5rem;"> <i class="fa-solid fa-user-tie" style="color: #0f3460; width: 14px; text-align: center;"></i> <span><strong>Speaker:</strong> Prof. Selina Wriessnegger (TU Graz) &amp; Dr. Luisa Cacciante (IRCCS San Camillo, Venice) &amp; Prof. Pietro Aricò (Sapienza University)</span> </div> <div class="text-xs text-slate-700" style="display: flex; align-items: center; gap: 0.5rem;"> <i class="fa-regular fa-clock" style="color: #0f3460; width: 14px; text-align: center;"></i> <span><strong>Date &amp; Time:</strong> November 26, 2026 · 1:30 PM – 4:00 PM</span> </div> <div class="text-xs text-slate-700" style="display: flex; align-items: center; gap: 0.5rem;"> <i class="fa-solid fa-location-dot" style="color: #0f3460; width: 14px; text-align: center;"></i> <span><strong>Location:</strong> Room 1A (Sala Conferenze), Building D, Piazzale Europa (main University of Trieste campus)</span> </div> </div> <p class="text-slate-500 text-sm leading-relaxed m-0"> Professor Selina Wriessnegger will give a seminar on passive BCIs in EEG-based neuroadaptive systems, followed by a round table discussion with other two expert guests. </p> </div> </div> <div style="flex-shrink: 0; align-self: center;"> <a href="https://forms.gle/aax6kQ7uC8UQdf6MA" target="_blank" rel="noopener noreferrer" class="btn-more" style="background-color: #0f3460; color: #ffffff !important; border-color: #0f3460;"> Registration Form → </a> </div> </div> </div> </div> <div class="section-block reveal-on-scroll"> <div class="section-title"> <span>Latest News</span> <a href="/waveslab/News/index.html" class="btn-more">View All News →</a> </div> <div class="news-container"> <div class="news-card"> <img src="/waveslab/assets/img/selina_in_her_lab.jpg" class="news-thumbnail" alt="News Image"> <div class="news-content"> <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 block mb-1"> November 2026 </span> <h4 class="text-lg font-bold text-slate-800 mb-1 hover:text-blue-600" style="transition: color 0.2s;"> <a href="/waveslab/news/2026/Prof-Wriessnegger-VP/" style="color: inherit; text-decoration: none;">Prof. Selina Wriessnegger Visiting Professor at the WavesLab</a> </h4> <p class="text-slate-500 text-sm leading-relaxed m-0"> Prof. Selina Wriessnegger (TU Graz) will visit Units from Nov.23rd to Dec.4th </p> </div> </div> <div class="news-card"> <div class="news-date-badge"> <span class="day">14</span> <span class="month">Oct</span> </div> <div class="news-content"> <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 block mb-1"> October 2026 </span> <h4 class="text-lg font-bold text-slate-800 mb-1 hover:text-blue-600" style="transition: color 0.2s;"> <a href="/waveslab/news/2026/Keynote-IEEE-PhD-School-Genova/" style="color: inherit; text-decoration: none;">Keynote Speech at the IEEE ComSoc PhD School on E-Health</a> </h4> <p class="text-slate-500 text-sm leading-relaxed m-0"> Giulia Cisotto gave an invited keynote speech at the University of Genova </p> </div> </div> <div class="news-card"> <div class="news-date-badge"> <span class="day">30</span> <span class="month">Sep</span> </div> <div class="news-content"> <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 block mb-1"> September 2026 </span> <h4 class="text-lg font-bold text-slate-800 mb-1 hover:text-blue-600" style="transition: color 0.2s;"> <a href="/waveslab/news/2026/Yusuf-Uveyik-Internship-Conclusion/" style="color: inherit; text-decoration: none;">Conclusion of Yusuf Üveyik's Visiting Internship at the WavesLab</a> </h4> <p class="text-slate-500 text-sm leading-relaxed m-0"> Yusuf Üveyik concludes his internship period at the WavesLab </p> </div> </div> </div> </div> <div class="section-block reveal-on-scroll"> <div class="section-title"> <span>Active Research Tracks</span> <a href="/waveslab/projects/" class="btn-more">Explore Projects →</a> </div> <div class="research-grid"> <div class="research-card"> <div> <h4 class="text-xl font-extrabold text-slate-800 mb-2"> <a href="/waveslab/projects/AgorAI_BCI_project/" class="hover:text-blue-600" style="color: inherit; text-decoration: none;">Edge AI-enabled BCI for Speech Rehabilitation</a> </h4> <p class="text-slate-500 text-sm leading-relaxed mb-4">Developing an affordable, privacy-preserving, real-time home rehabilitation system enhanced by a local LLM.</p> </div> <a href="/waveslab/projects/AgorAI_BCI_project/" class="text-sm font-bold text-sky-700 hover:text-sky-900 text-decoration-none">Learn track details →</a> </div> <div class="research-card"> <div> <h4 class="text-xl font-extrabold text-slate-800 mb-2"> <a href="/waveslab/projects/ECG_ASUGI_project/" class="hover:text-blue-600" style="color: inherit; text-decoration: none;">Explainable AI for ECG-based Screening of Cardiomyopathies</a> </h4> <p class="text-slate-500 text-sm leading-relaxed mb-4">This study aims to develop explainable machine-learning and deep-learning models to identify ECG-derived signatures associated with contrast-enhanced cardiac magnetic resonance...</p> </div> <a href="/waveslab/projects/ECG_ASUGI_project/" class="text-sm font-bold text-sky-700 hover:text-sky-900 text-decoration-none">Learn track details →</a> </div> </div> </div> <div class="section-block reveal-on-scroll"> <div class="section-title"> <span>Featured Publications</span> <a href="/waveslab/publications/" class="btn-more">Full Bibliography →</a> </div> <div class="publication-wrapper"> <h2 class="bibliography">to appear</h2> <ol class="bibliography"><li> <div class="row"> <div class="col col-sm-2 abbr"> </div> <div id="sharifi2026learning" class="col-sm-8"> <div class="title">Learning from VAE Errors to support ECG-based Differential Diagnosis of Myocardial Scar</div> <div class="author"> Shayan Sharifi, Riccardo Treu, Ilaria Gandin, and <span class="more-authors" title="click to view 3 more authors" onclick=" var element=this; element.setAttribute('title', ''); var more_authors_text=element.textContent == '3 more authors' ? 'Federico Garoia, Marco Merlo, Giulia Cisotto' : '3 more authors'; var cursorPosition=0; var textAdder=setInterval(function(){ element.innerHTML = more_authors_text.substring(0, cursorPosition + 1); if (++cursorPosition == more_authors_text.length){ clearInterval(textAdder); } }, '10'); ">3 more authors</span> </div> <div class="periodical"> <em>In Proceedings of the Fifth PharML Workshop, held in conjunction with ECML PKDD 2026, Naples, Italy, September 6–9, 2026 *(to appear)*.</em>, to appear </div> <div class="periodical"> </div> <div class="links"> </div> </div> </div> </li></ol> <h2 class="bibliography">2024</h2> <ol class="bibliography"><li> <div class="row"> <div class="col col-sm-2 abbr"> </div> <div id="hveegnet2024" class="col-sm-8"> <div class="title">hvEEGNet: a novel deep learning model for high-fidelity EEG reconstruction</div> <div class="author"> Giulia Cisotto, Alberto Zancanaro, Italo Francesco Zoppis, and <span class="more-authors" title="click to view 1 more author" onclick=" var element=this; element.setAttribute('title', ''); var more_authors_text=element.textContent == '1 more author' ? 'Sara L. Manzoni' : '1 more author'; var cursorPosition=0; var textAdder=setInterval(function(){ element.innerHTML = more_authors_text.substring(0, cursorPosition + 1); if (++cursorPosition == more_authors_text.length){ clearInterval(textAdder); } }, '10'); ">1 more author</span> </div> <div class="periodical"> <em>Frontiers Neuroinformatics</em>, 2024 </div> <div class="periodical"> </div> <div class="links"> <a href="https://doi.org/10.3389/FNINF.2024.1459970" class="btn btn-sm z-depth-0" role="button" rel="external nofollow noopener" target="_blank">DOI</a> </div> </div> </div> </li></ol> </div> </div> </div> <script>
+  // --- 1. Wave Canvas Pipeline ---
+  const canvas = document.getElementById('waveCanvas');
+  const ctx = canvas.getContext('2d');
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  const mouse = {
+    x: -1000,
+    y: (canvas.height / 2) - 70,
+    targetX: -1000,
+    targetY: (canvas.height / 2) - 70
+  };
+
+  window.addEventListener('mousemove', (e) => {
+    mouse.targetX = e.clientX;
+    mouse.targetY = e.clientY;
+  });
+
+  window.addEventListener('mouseleave', () => {
+    mouse.targetX = -1000;
+  });
+
+  let phase = 0;
+
+  function animate() {
+    requestAnimationFrame(animate);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    mouse.x += (mouse.targetX - mouse.x) * 0.1;
+    mouse.y += (mouse.targetY - mouse.y) * 0.1;
+
+    // Wave line shifted up by 70px to align with .logo-wrapper margin-top
+    const centerY = (canvas.height / 2) - 70;
+
+    const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+    gradient.addColorStop(0.1, '#0f3460');
+    gradient.addColorStop(0.5, '#6a1b9a');
+    gradient.addColorStop(0.9, '#e61246');
+
+    ctx.beginPath();
+    ctx.moveTo(0, centerY);
+
+    for (let x = 0; x <= canvas.width; x += 2) {
+      const distToMouse = Math.abs(x - mouse.x);
+      const spread = 180;
+      const influence = Math.exp(-Math.pow(distToMouse / spread, 2));
+
+      const baseWave = Math.sin(x * 0.003 + phase) * 8;
+      const spikeFrequency = 0.04;
+      const spike = Math.sin(x * spikeFrequency - phase * 3) * (influence * 60);
+
+      const y = centerY + baseWave + spike;
+      ctx.lineTo(x, y);
+    }
+
+    ctx.strokeStyle = gradient;
+    ctx.lineWidth = 2.5;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+
+    phase += 0.03;
+  }
+
+  animate();
+
+  // --- 2. Typewriter Effect for Subtitle ---
+  const textToType = "Since November 2025 · Trieste";
+  const subtitleContainer = document.getElementById('typewriterSubtitle');
+  let charIndex = 0;
+
+  function typeWriter() {
+    if (charIndex === 0) {
+      subtitleContainer.innerHTML = '<span id="typedText"></span><span class="typewriter-cursor"></span>';
+    }
+    
+    if (charIndex < textToType.length) {
+      document.getElementById('typedText').textContent += textToType.charAt(charIndex);
+      charIndex++;
+      setTimeout(typeWriter, 50); // Speed of typing in ms
+    }
+  }
+
+  // Delay typewriter slightly to synchronize with logo fade-in
+  setTimeout(typeWriter, 800);
+
+  // --- 3. Intersection Observer for Scroll Fade-In ---
+  const observerOptions = {
+    root: null,
+    threshold: 0.15
+  };
+
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.reveal-on-scroll').forEach(element => {
+    revealObserver.observe(element);
+  });
+</script> <link rel="stylesheet" href="/waveslab/assets/css/theme-override.css"> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 WavesLab . Designed by <a href="https://shayansharifi.net/" target="_blank">Shayan Sharifi</a>. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/waveslab/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/waveslab/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/waveslab/assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/waveslab/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/waveslab/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/waveslab/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/waveslab/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/waveslab/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/waveslab/assets/al_img_tools/js/zoom.js"></script> <script defer src="/waveslab/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/waveslab/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/waveslab/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-home",
+    title: "Home",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/waveslab/";
+    },
+  },{id: "nav-news",
+          title: "News",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/waveslab/News/index.html";
+          },
+        },{id: "nav-team",
+          title: "Team",
+          description: "Meet the researchers, students, and collaborators at WAVESLAB.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/waveslab/team/";
+          },
+        },{id: "nav-publications",
+          title: "Publications",
+          description: "Publications by categories in reverse chronological order.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/waveslab/publications/";
+          },
+        },{id: "nav-projects",
+          title: "Projects",
+          description: "A growing collection of research initiatives and active projects.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/waveslab/projects/";
+          },
+        },{id: "nav-github",
+          title: "GitHub",
+          description: "Open-source code, toolboxes, and software packages developed by WAVESLAB.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/waveslab/repositories/";
+          },
+        },{id: "nav-collaborations",
+          title: "Collaborations",
+          description: "Building interdisciplinary bridges across academic institutions, research hospitals, and industry leaders.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/waveslab/collaborations/";
+          },
+        },{id: "nav-events",
+          title: "Events",
+          description: "Course materials, schedules, and resources for classes taught.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/waveslab/Events/";
+          },
+        },{id: "nav-join-us",
+          title: "Join us",
+          description: "Join the WavesLab as a Ph.D. researcher, Postdoc, or Master/Bachelor thesis student.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/waveslab/Join%20us/";
+          },
+        },{id: "nav-contact",
+          title: "Contact",
+          description: "Get in touch with the WavesLab or visit our facilities at the University of Trieste.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/waveslab/contact/";
+          },
+        },{id: "post-prof-selina-wriessnegger-visiting-professor-at-the-waveslab",
+        
+          title: "Prof. Selina Wriessnegger Visiting Professor at the WavesLab",
+        
+        description: "Prof. Selina Wriessnegger (TU Graz) will visit Units from Nov.23rd to Dec.4th",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/waveslab/news/2026/Prof-Wriessnegger-VP/";
+          
+        },
+      },{id: "post-keynote-speech-at-the-ieee-comsoc-phd-school-on-e-health",
+        
+          title: "Keynote Speech at the IEEE ComSoc PhD School on E-Health",
+        
+        description: "Giulia Cisotto gave an invited keynote speech at the University of Genova",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/waveslab/news/2026/Keynote-IEEE-PhD-School-Genova/";
+          
+        },
+      },{id: "post-conclusion-of-yusuf-üveyik-39-s-visiting-internship-at-the-waveslab",
+        
+          title: "Conclusion of Yusuf Üveyik&#39;s Visiting Internship at the WavesLab",
+        
+        description: "Yusuf Üveyik concludes his internship period at the WavesLab",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/waveslab/news/2026/Yusuf-Uveyik-Internship-Conclusion/";
+          
+        },
+      },{id: "post-the-waveslab-at-trieste-next-2026",
+        
+          title: "The WavesLab at Trieste Next 2026",
+        
+        description: "The WavesLab participated in Trieste Next 2026 from September 25th to 27th",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/waveslab/news/2026/trieste-next/";
+          
+        },
+      },{id: "post-invited-talk-at-the-italian-network-for-computational-and-theoretical-neuroscience-inctn",
+        
+          title: "Invited Talk at the Italian Network for Computational and Theoretical Neuroscience (INCTN)",
+        
+        description: "Giulia Cisotto gave an invited talk at INCTN 2026 hosted by SISSA in Trieste",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/waveslab/news/2026/Talk-INCTN-SISSA/";
+          
+        },
+      },{id: "post-shayan-sharifi-presents-first-year-phd-activity-at-adsai-poster-session",
+        
+          title: "Shayan Sharifi Presents First-Year PhD Activity at ADSAI Poster Session",
+        
+        description: "Shayan Sharifi presented his first-year PhD research at the ADSAI poster session",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/waveslab/news/2026/Shayan-Sharifi-PhD-Poster/";
+          
+        },
+      },{id: "post-official-announcement-of-the-waveslab-launch-at-agorai-sandpit-event",
+        
+          title: "Official Announcement of the WavesLab Launch at AgorAI Sandpit Event",
+        
+        description: "Giulia Cisotto announced the launch of the WavesLab at Palazzo Berlam in Trieste",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/waveslab/news/2026/AgorAI-Sandpit-WavesLab-Launch/";
+          
+        },
+      },{id: "post-paper-accepted-at-ecml-pkdd-workshop-pharml",
+        
+          title: "Paper Accepted at ECML PKDD Workshop PharML",
+        
+        description: "Paper on ECG-based differential diagnosis of myocardial scar accepted at PharML",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/waveslab/news/2026/Paper-Accepted-ECML-PKDD-PharML/";
+          
+        },
+      },{id: "post-brief-talk-on-autoresearch-by-dr-alberto-zancanaro",
+        
+          title: "Brief Talk on AutoResearch by Dr. Alberto Zancanaro",
+        
+        description: "Former lab member Dr. Alberto Zancanaro will give a brief talk on AutoResearch on July 16th at 10 am.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/waveslab/news/2026/alberto-zancanaro-talk/";
+          
+        },
+      },{id: "post-welcoming-visiting-student-yusuf-üveyik",
+        
+          title: "Welcoming Visiting Student Yusuf Üveyik!",
+        
+        description: "The WavesLab welcomes Yusuf Üveyik, BSc student from Marmara University, as a visiting student.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/waveslab/news/2026/welcome-yusuf/";
+          
+        },
+      },{id: "books-the-godfather",
+          title: 'The_godfather',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/waveslab/books/the_godfather/";
+            },},{id: "projects-edge-ai-enabled-bci-for-speech-rehabilitation",
+          title: 'Edge AI-enabled BCI for Speech Rehabilitation',
+          description: "Developing an affordable, privacy-preserving, real-time home rehabilitation system enhanced by a local LLM.",
+          section: "Projects",handler: () => {
+              window.location.href = "/waveslab/projects/AgorAI_BCI_project/";
+            },},{id: "projects-explainable-ai-for-ecg-based-screening-of-cardiomyopathies",
+          title: 'Explainable AI for ECG-based Screening of Cardiomyopathies',
+          description: "This study aims to develop explainable machine-learning and deep-learning models to identify ECG-derived signatures associated with contrast-enhanced cardiac magnetic resonance imaging features.",
+          section: "Projects",handler: () => {
+              window.location.href = "/waveslab/projects/ECG_ASUGI_project/";
+            },},{id: "teachings-computational-neuroscience",
+          title: 'Computational Neuroscience',
+          description: "This course covers the foundational aspects of data science, including data collection, cleaning, analysis, and visualization. Students will learn practical skills for working with real-world datasets.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/waveslab/teachings/data-science-fundamentals/";
+            },},{id: "teachings-introduction-to-machine-learning",
+          title: 'Introduction to Machine Learning',
+          description: "This course provides an introduction to machine learning concepts, algorithms, and applications. Students will learn about supervised and unsupervised learning, model evaluation, and practical implementations.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/waveslab/teachings/introduction-to-machine-learning/";
+            },},{
+        id: 'social-cv',
+        title: 'CV',
+        section: 'Socials',
+        handler: () => {
+          window.open("/waveslab/assets/pdf/example_pdf.pdf", "_blank");
+        },
+      },{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:", "_blank");
+        },
+      },{
+        id: 'social-inspire',
+        title: 'Inspire HEP',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://inspirehep.net/authors/1010907", "_blank");
+        },
+      },{
+        id: 'social-rss',
+        title: 'RSS Feed',
+        section: 'Socials',
+        handler: () => {
+          window.open("/waveslab/feed.xml", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=", "_blank");
+        },
+      },{
+        id: 'social-custom_social',
+        title: 'Custom_social',
+        section: 'Socials',
+        handler: () => {
+          window.open("", "_blank");
+        },
+      },];
+
+</script> <script src="/waveslab/assets/al_search/js/shortcut-key.js"></script> </body> </html>
