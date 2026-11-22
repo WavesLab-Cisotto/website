@@ -1,0 +1,24 @@
+# Available Thesis Topics (B.Sc. / M.Sc.)
+thesis_topics:
+  - title: "Generative Models (VAEs/Diffusion) for Synthetic EEG Data Generation"
+    level: "M.Sc. Thesis"
+    advisor: "Prof. Giulia Cisotto"
+    prerequisites: "Python, Deep Learning basics (PyTorch)"
+    description: "Investigation of generative AI models to generate realistic synthetic EEG signals for data augmentation and privacy-preserving clinical benchmarks."
+
+  - title: "Benchmarking ECG R-Peak Detection in Wearable Cardiac Devices"
+    level: "B.Sc. / M.Sc. Thesis"
+    advisor: "Prof. Giulia Cisotto & Shayan Sharifi"
+    prerequisites: "Python, Signal Processing"
+    description: "Evaluating classical and deep-learning-based R-peak detection algorithms across noisy, real-world wearable ECG datasets."
+
+
+
+# Open Ph.D., Postdoc, or Research Fellow Positions
+open_roles: []
+
+
+# How to apply instructions box
+application_info:
+  email: "giulia.cisotto@units.it"
+  requirements:
