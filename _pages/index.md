@@ -352,9 +352,8 @@ html, body {
     </div>
     <div class="subtitle" id="typewriterSubtitle"></div>
   </div>
-</div>
 
-<!-- Smooth Scroll Down Button -->
+  <!-- Smooth Scroll Down Button -->
   <a href="#main-content" class="scroll-indicator" id="scrollDownBtn" aria-label="Scroll down to content">
     <span class="scroll-indicator-text">Scroll</span>
     <div class="scroll-indicator-circle">
