@@ -23,10 +23,10 @@ html, body {
   }
 
   /* --- Fullscreen Interactive Waves Banner --- */
-  .banner-container {
+.banner-container {
     position: relative;
     width: 100vw;
-    height: 100vh;
+    height: calc(100vh - 56px); /* Fits inside the visible screen below the top navbar */
     margin-left: calc(-50vw + 50%);
     margin-top: 0;
     display: flex;
@@ -127,9 +127,9 @@ html, body {
     50% { opacity: 0; }
   }
 /* --- Scroll Down Indicator --- */
-  .scroll-indicator {
+.scroll-indicator {
     position: absolute;
-    bottom: 58px;
+    bottom: 42px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 3;
