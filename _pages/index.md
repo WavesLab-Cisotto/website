@@ -129,7 +129,7 @@ html, body {
 /* --- Scroll Down Indicator --- */
 .scroll-indicator {
     position: absolute;
-    bottom: 110px; /* Moves both "SCROLL" and the arrow circle higher up into clear view */
+    bottom: 110px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
@@ -143,6 +143,14 @@ html, body {
     opacity: 0;
     animation: fadeInScroll 1s ease forwards;
     animation-delay: 1.4s;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+  }
+
+  .scroll-indicator.is-hidden {
+    animation: none !important;
+    opacity: 0 !important;
+    visibility: hidden;
+    pointer-events: none;
   }
 
   .scroll-indicator-text {
@@ -601,12 +609,16 @@ html, body {
       }
     });
   }
-  // Fade out scroll indicator once user scrolls down
+// --- 5. Fade Out Scroll Indicator on Scroll ---
   window.addEventListener('scroll', () => {
-    if (scrollBtn) {
-      scrollBtn.style.opacity = window.scrollY > 60 ? '0' : '1';
-      scrollBtn.style.pointerEvents = window.scrollY > 60 ? 'none' : 'auto';
+    if (!scrollBtn) return;
+    if (window.scrollY > 50) {
+      scrollBtn.classList.add('is-hidden');
+    } else {
+      scrollBtn.classList.remove('is-hidden');
+      scrollBtn.style.animation = 'none';
+      scrollBtn.style.opacity = '1';
     }
-  });
+  }, { passive: true });
 </script>
 <link rel="stylesheet" href="{{ '/assets/css/theme-override.css' | relative_url }}">
