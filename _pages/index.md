@@ -126,6 +126,69 @@ html, body {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
   }
+/* --- Scroll Down Indicator --- */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 58px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: #0f3460;
+    text-decoration: none !important;
+    cursor: pointer;
+    opacity: 0;
+    animation: fadeInScroll 1s ease forwards;
+    animation-delay: 1.4s;
+  }
+
+  .scroll-indicator-text {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #64748b;
+    transition: color 0.25s ease;
+  }
+
+  .scroll-indicator-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 2px solid #cbd5e1;
+    background-color: rgba(255, 255, 255, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(15, 52, 96, 0.08);
+    animation: bounceArrow 2s infinite;
+    transition: all 0.25s ease;
+  }
+
+  .scroll-indicator:hover .scroll-indicator-text {
+    color: #0f3460;
+  }
+
+  .scroll-indicator:hover .scroll-indicator-circle {
+    background-color: #0f3460;
+    border-color: #0f3460;
+    color: #ffffff;
+    box-shadow: 0 6px 16px rgba(15, 52, 96, 0.2);
+  }
+
+  @keyframes fadeInScroll {
+    from { opacity: 0; transform: translate(-50%, 10px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+  }
+
+  @keyframes bounceArrow {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(6px); }
+    60% { transform: translateY(3px); }
+  }
 
   /* --- Scroll-Driven Fade In for Page Elements --- */
   .reveal-on-scroll {
@@ -291,7 +354,16 @@ html, body {
   </div>
 </div>
 
-<div class="content-section">
+<!-- Smooth Scroll Down Button -->
+  <a href="#main-content" class="scroll-indicator" id="scrollDownBtn" aria-label="Scroll down to content">
+    <span class="scroll-indicator-text">Scroll</span>
+    <div class="scroll-indicator-circle">
+      <i class="fa-solid fa-chevron-down"></i>
+    </div>
+  </a>
+</div>
+
+<div class="content-section" id="main-content">
   
   <!-- 2. Introduction Card -->
   <div class="section-block reveal-on-scroll">
@@ -516,5 +588,17 @@ html, body {
   document.querySelectorAll('.reveal-on-scroll').forEach(element => {
     revealObserver.observe(element);
   });
+
+  // --- 4. Smooth Scroll for Hero Arrow ---
+  const scrollBtn = document.getElementById('scrollDownBtn');
+  if (scrollBtn) {
+    scrollBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.getElementById('main-content');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
 </script>
 <link rel="stylesheet" href="{{ '/assets/css/theme-override.css' | relative_url }}">
