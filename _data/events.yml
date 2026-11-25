@@ -3,9 +3,10 @@ upcoming:
     speaker: "Prof. Selina Wriessnegger (TU Graz) & Dr. Luisa Cacciante (IRCCS San Camillo, Venice) & Prof. Pietro Aricò (Sapienza University)"
     date_time: "November 26, 2026 · 1:30 PM – 4:00 PM"
     location: "Room 1A (Sala Conferenze), Building D, Piazzale Europa (main University of Trieste campus)"
-    image: "selina_in_her_lab.jpg" # Optional: file inside assets/img/
-  description: "Professor Selina Wriessnegger will give a seminar on passive BCIs in EEG-based neuroadaptive systems, followed by a round table discussion with other two expert guests. You can join the evetn online at ([here](https://www.google.com/url?q=https://teams.microsoft.com/meet/311429881493266?p%3DLvJtXaB55dzVW1D3My&sa=D&source=calendar&usd=2&usg=AOvVaw2qC-m1FnNmDd4deIkoO7ra]))"
+    image: "selina_in_her_lab.jpg"
+    description: "Professor Selina Wriessnegger will give a seminar on passive BCIs in EEG-based neuroadaptive systems, followed by a round table discussion with two expert guests. Online streaming is also available via Microsoft Teams."
     registration_link: "https://forms.gle/aax6kQ7uC8UQdf6MA"
+    streaming_link: "https://teams.microsoft.com/meet/311429881493266?p=LvJtXaB55dzVW1D3My"
 
 past:
   - title: "Trieste Next 2026"
@@ -15,6 +16,7 @@ past:
     image: "trieste_next_2026.jpg"
     description: "Interactive public science demonstrations and hands-on brain-computer interface showcases at Trieste Next."
     registration_link: "https://www.triestenext.it/"
+    streaming_link: ""
 
   - title: "Brief Talk on AutoResearch"
     speaker: "Dr. Alberto Zancanaro"
@@ -23,3 +25,4 @@ past:
     image: "alberto_zancanaro.jpg"
     description: "Former lab member Dr. Alberto Zancanaro presented recent advances and workflows in AutoResearch."
     registration_link: ""
+    streaming_link: ""

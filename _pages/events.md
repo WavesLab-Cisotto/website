@@ -212,6 +212,11 @@ calendar: true
                   </a>
                 </div>
               {% endif %}
+              {% if event.streaming_link and event.streaming_link != "" %}
+    <a href="{{ event.streaming_link }}" target="_blank" rel="noopener noreferrer" class="btn-theme-outline">
+      <i class="fa-solid fa-video me-2"></i> Join Online (Teams)
+    </a>
+  {% endif %}
             </div>
 
             <!-- Right Side: Framed Photo -->
