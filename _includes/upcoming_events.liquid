@@ -60,20 +60,21 @@
           </div>
         </div>
 
-        {% if event.registration_link and event.registration_link != "" %}
-          <div style="flex-shrink: 0; align-self: center;">
-            <a href="{{ event.registration_link }}" target="_blank" rel="noopener noreferrer" class="btn-more" style="background-color: #0f3460; color: #ffffff !important; border-color: #0f3460;">
-              Registration Form &rarr;
-            </a>
+        {% if (event.registration_link and event.registration_link != "") or (event.streaming_link and event.streaming_link != "") %}
+          <div style="flex-shrink: 0; align-self: center; display: flex; flex-direction: column; gap: 0.5rem;">
+            {% if event.registration_link and event.registration_link != "" %}
+              <a href="{{ event.registration_link }}" target="_blank" rel="noopener noreferrer" class="btn-more" style="background-color: #0f3460; color: #ffffff !important; border-color: #0f3460; text-align: center;">
+                Registration Form &rarr;
+              </a>
+            {% endif %}
+
+            {% if event.streaming_link and event.streaming_link != "" %}
+              <a href="{{ event.streaming_link }}" target="_blank" rel="noopener noreferrer" class="btn-more" style="text-align: center;">
+                Join Online (Teams) &rarr;
+              </a>
+            {% endif %}
           </div>
         {% endif %}
-        {% if event.streaming_link and event.streaming_link != "" %}
-      <a href="{{ event.streaming_link }}" target="_blank" rel="noopener noreferrer" class="btn-more" style="text-align: center;">
-        Join Online (Teams) &rarr;
-      </a>
-    {% endif %}
-  </div>
-{% endif %}
       </div>
     {% endfor %}
   </div>
